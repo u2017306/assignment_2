@@ -25,15 +25,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-      working-directory: my-app
     - run: npm run build --if-present
-      working-directory: my-app
     - run: npm test
-      working-directory: my-app
-
-    - name: Deploy to Heroku
-      env:
-        HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN  }}
-        HEROKU_APP_NAME: "u2017306-assignment3"
-      if: github.ref == 'refs/heads/master' && job.status == 'success'
-      run: git push -f https://heroku:HEROKU_API_TOKEN@git.heroku.com/HEROKU_APP_NAME.git master
